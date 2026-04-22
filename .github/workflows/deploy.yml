@@ -41,5 +41,5 @@ jobs:
         run: |
           aws ecs update-service \
             --cluster babo-app \
-            --service babo-app \
+            --service babo-app-service-cgpgqfbn \
             --force-new-deployment
