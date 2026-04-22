@@ -1,4 +1,4 @@
-name: CI/CD to ECR
+name: CI/CD to ECR + ECS
 
 on:
   push:
@@ -36,3 +36,10 @@ jobs:
       - name: 🚀 Push to ECR
         run: |
           docker push ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest
+
+      - name: 🔄 Force ECS deployment
+        run: |
+          aws ecs update-service \
+            --cluster babo-app \
+            --service babo-app \
+            --force-new-deployment
